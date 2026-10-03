@@ -6,4 +6,6 @@ prompts:
 
 tests:
   - vars:
-      question: "Prueba de conexión"
+      question: "cuál es el peso máximo"
+  - vars:
+      question: "Quiero agendar una cita para mañana a las 10"
