@@ -9,10 +9,13 @@ def resolver_faq(pregunta: str) -> str:
     resultados = buscar_en_base_conocimiento(pregunta)
     if not resultados or resultados[0].get("error"):
         return "No fue posible consultar la base de conocimiento."
-    mejor = resultados[0]
-    if mejor.get("similarity_score", 0) < 0.60:
-        return "No encontré esa información en la base de conocimiento de Parachute S.A."
-    return mejor["respuesta"]
+    for resultado in resultados:
+        respuesta = resultado.get("respuesta", "")
+        if (resultado.get("similarity_score", 0) >= 0.60
+                and respuesta
+                and not respuesta.startswith("Respuesta detallada para la consulta sobre")):
+            return respuesta
+    return "No encontré esa información en la base de conocimiento de Parachute S.A."
 
 
 @function_tool
@@ -22,4 +25,14 @@ def consultar_faq(pregunta: str) -> str:
 
 
 def create_agent() -> Agent:
-    return Agent(name="FAQ Agent", instructions="Responde solo con información respaldada por la herramienta.", tools=[consultar_faq], model=build_model())
+    return Agent(
+        name="FAQ Agent",
+        instructions=(
+            "Consulta siempre consultar_faq con la pregunta del usuario. "
+            "Devuelve la respuesta de la herramienta sin agregar datos, cifras ni "
+            "servicios de conocimiento externo. Si la herramienta indica que no hay "
+            "información o que hubo un error, devuelve únicamente ese mensaje y termina."
+        ),
+        tools=[consultar_faq],
+        model=build_model(),
+    )

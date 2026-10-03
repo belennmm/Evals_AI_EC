@@ -4,8 +4,4 @@ providers:
 prompts:
   - "{{question}}"
 
-tests:
-  - vars:
-      question: "cuál es el peso máximo"
-  - vars:
-      question: "Quiero agendar una cita para mañana a las 10"
+tests: file://Evals/faq_tests.yaml

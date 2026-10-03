@@ -17,7 +17,10 @@ def create_manager() -> Agent:
         name="Parachute Manager",
         instructions=(
             "Mantienes siempre el control. "
-            "Para FAQs usa FAQ Agent. "
+            "Para FAQs usa FAQ Agent y devuelve su respuesta sin añadir información "
+            "ni cambiar cifras. Si indica falta de información o error, conserva "
+            "únicamente ese mensaje y termina; no ofrezcas otros servicios ni inicies "
+            "una reserva que el usuario no haya solicitado. "
             "Para una reserva: pide fecha si falta; "
             "usa Weather Agent, entrega su JSON a Safety Agent "
             "y solo si puede_saltar es true usa Booking Agent. "
