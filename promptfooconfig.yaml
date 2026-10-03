@@ -1,0 +1,9 @@
+providers:
+  - id: file://providers/promptfoo_provider.py
+
+prompts:
+  - "{{question}}"
+
+tests:
+  - vars:
+      question: "Prueba de conexión"
