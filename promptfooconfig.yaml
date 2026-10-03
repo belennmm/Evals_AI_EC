@@ -4,4 +4,20 @@ providers:
 prompts:
   - "{{question}}"
 
-tests: file://Evals/faq_tests.yaml
+tests:
+  - file://Evals/faq_tests.yaml
+  - file://Evals/booking_tests.yaml
+
+defaultTest:
+  options:
+    provider:
+      id: groq:openai/gpt-oss-120b
+      config:
+        temperature: 0
+        include_reasoning: false
+    factuality:
+      subset: 0
+      superset: 1
+      agree: 1
+      disagree: 0
+      differButFactual: 0

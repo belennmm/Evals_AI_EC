@@ -1,43 +1,75 @@
-# Assertions léxicas respaldadas por el corpus; no sustituyen factuality.
+# Assertions determinísticas conservadas y factuality respaldada por el corpus.
 - description: "FAQ-021: límite de peso"
   vars:
     question: "cuál es el peso máximo"
   assert:
+    - type: latency
+      threshold: 45000
+    - type: javascript
+      metric: tool_faq_agent
+      value: |
+        const calls = context.providerResponse?.metadata?.tool_calls;
+        return Array.isArray(calls) && calls.some(item => item?.call?.name === 'faq_agent');
     - type: contains
       value: "100"
     - type: regex
       value: '\b100\s*(?:\*\*)?\s*(?:[Kk][Gg]|[Kk]ilogramos?)\b'
+    - type: factuality
+      value: "El peso máximo permitido para realizar el salto tándem es 100 kg."
+      threshold: 1
 
 - description: "FAQ-053: duración de la caída libre"
   vars:
     question: "cuánto dura la caída libre"
   assert:
+    - type: latency
+      threshold: 45000
+    - type: javascript
+      metric: tool_faq_agent
+      value: |
+        const calls = context.providerResponse?.metadata?.tool_calls;
+        return Array.isArray(calls) && calls.some(item => item?.call?.name === 'faq_agent');
     - type: contains
       value: "35"
     - type: contains
       value: "45"
     - type: regex
       value: '\b35\s*(?:\*\*)?\s*(?:[Aa]|[Yy]|[-–—])\s*(?:\*\*)?\s*45\s*(?:\*\*)?\s*(?:[Ss]egundos?|[Ss]egs?\.?|s)\b'
+    - type: factuality
+      value: "La caída libre dura aproximadamente entre 35 y 45 segundos antes de abrir el paracaídas."
+      threshold: 1
 
 - description: "FAQ-081/082: prohibición de cámara personal durante el salto"
   vars:
     question: "puedo usar mi propia cámara durante el salto"
   assert:
+    - type: latency
+      threshold: 45000
     - type: regex
       value: '(?:[Nn][Oo]\s+(?:se\s+)?(?:permite[n]?|puede[s]?|est[aá]\s+permitid[oa])|[Pp]rohibid[oa])[^.!?]{0,160}[Cc][aá]maras?|[Cc][aá]maras?[^.!?]{0,160}(?:[Nn][Oo]\s+(?:se\s+)?(?:permite[n]?|puede[s]?|est[aá]\s+permitid[oa])|[Pp]rohibid[oa])'
+    - type: factuality
+      value: "No se permite utilizar cámaras personales, teléfonos celulares o GoPro durante el vuelo o la caída libre por seguridad."
+      threshold: 1
 
 - description: "FAQ-074: recargo dentro del rango autorizado de peso"
   vars:
     question: "Si peso 95 kg, ¿tengo que pagar un recargo por mi peso?"
   assert:
+    - type: latency
+      threshold: 45000
     - type: contains
       value: "250"
     - type: regex
       value: '\b(?:[Qq]\s*250|250\s*(?:[Qq]uetzales|[Qq]))\b'
+    - type: factuality
+      value: "Una persona con peso entre 90 y 100 kg debe pagar un recargo administrativo de Q250."
+      threshold: 1
 
 - description: "Caso negativo: no hay política explícita sobre perros en el corpus"
   vars:
     question: "puedo llevar perros"
   assert:
+    - type: latency
+      threshold: 45000
     - type: regex
       value: '[Nn][Oo]\s+(?:hay|tengo|tenemos|dispongo\s+de|contamos\s+con|cuento\s+con|encontr[eé]|encontramos|se\s+(?:encontr[oó]|dispone\s+de|cuenta\s+con|especifica|menciona|indica))[^.!?]{0,180}(?:informaci[oó]n|datos|detalles|pol[ií]tica|perros|mascotas)|(?:[Ii]nformaci[oó]n|[Dd]atos|[Dd]etalles|[Pp]ol[ií]tica)[^.!?]{0,120}(?:no\s+(?:est[aá]|se\s+encuentra|se\s+especifica)|no\s+disponible)|[Nn][Oo]\s+(?:puedo|podemos)\s+(?:confirmar|asegurar)'

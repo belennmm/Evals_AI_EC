@@ -1,2 +1,56 @@
-# Casos de reservas pendientes de implementar en una etapa posterior.
-[]
+# El pronóstico real puede cambiar: la expectativa de bloqueo debe revisarse.
+- description: "Reserva bloqueada por seguridad: 2026-10-10"
+  vars:
+    question: "Quiero agendar una cita para el 2026-10-10 a las 10:00"
+  assert:
+    - type: contains
+      value: "2026"
+    - type: regex
+      value: '[Pp][Rr][Oo][Hh][Ii][Bb][Ii][Dd][OoAaSs]*|[Nn]o\s+(?:se\s+)?(?:puede|podemos|es\s+posible)\s+(?:confirmar|agendar|reservar|realizar)|[Cc]ondiciones\s+no\s+aptas'
+    - type: factuality
+      value: "La reserva solicitada para el 2026-10-10 fue rechazada porque la evaluación meteorológica indicó condiciones prohibidas para saltar."
+      threshold: 1
+    - type: latency
+      threshold: 70000
+    - type: javascript
+      metric: tool_weather_agent
+      value: |
+        const calls = context.providerResponse?.metadata?.tool_calls;
+        return Array.isArray(calls) && calls.some(item => item?.call?.name === 'weather_agent');
+    - type: javascript
+      metric: tool_safety_agent
+      value: |
+        const calls = context.providerResponse?.metadata?.tool_calls;
+        return Array.isArray(calls) && calls.some(item => item?.call?.name === 'safety_agent');
+
+- description: "Reserva incompleta: solicitar fecha sin crear reserva"
+  vars:
+    question: "Quiero reservar un salto"
+  assert:
+    - type: regex
+      value: '(?:[Ff]echa|[Dd][ií]a|[Hh]ora)'
+    - type: regex
+      value: '[?¿]|[Nn]ecesito|[Ii]nd[ií]ca|[Pp]roporciona|[Dd]ime|[Ff]alta'
+    - type: latency
+      threshold: 70000
+    - type: javascript
+      metric: no_booking_without_date
+      value: |
+        const calls = context.providerResponse?.metadata?.tool_calls;
+        return Array.isArray(calls) && !calls.some(item => item?.call?.name === 'booking_agent');
+
+- description: "Fecha inexistente: no crear reserva"
+  vars:
+    question: "Quiero reservar un salto para el 2026-02-30 a las 10:00"
+  assert:
+    - type: regex
+      value: '[Ff]echa|[Ff]ebrero|[Ff]ormato'
+    - type: regex
+      value: '[Ii]nv[aá]lid|[Ii]ncorrect|[Nn]o\s+existe|[Nn]o\s+es\s+v[aá]lid|[Nn]o\s+tiene|[Ff]echa\s+v[aá]lida|[Nn]o\s+puede\s+ser\s+anterior'
+    - type: latency
+      threshold: 70000
+    - type: javascript
+      metric: no_booking_invalid_date
+      value: |
+        const calls = context.providerResponse?.metadata?.tool_calls;
+        return Array.isArray(calls) && !calls.some(item => item?.call?.name === 'booking_agent');
