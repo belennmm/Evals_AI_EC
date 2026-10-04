@@ -1,0 +1,1961 @@
+{
+  "evalId": "eval-v6Z-2026-10-03T06:12:00",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-10-03T06:12:00.774Z",
+    "prompts": [
+      {
+        "id": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "raw": "{{question}}",
+        "label": "{{question}}",
+        "provider": "file://providers/promptfoo_provider.py",
+        "metrics": {
+          "score": 7.75,
+          "testPassCount": 7,
+          "testFailCount": 1,
+          "testErrorCount": 0,
+          "assertPassCount": 33,
+          "assertFailCount": 1,
+          "totalLatencyMs": 283768,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 8,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 3652,
+              "prompt": 2118,
+              "completion": 1534,
+              "cached": 0,
+              "numRequests": 5,
+              "completionDetails": {
+                "reasoning": 1059,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 512,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {
+            "tool_faq_agent": 2,
+            "no_booking_without_date": 1,
+            "tool_weather_agent": 1,
+            "tool_safety_agent": 1,
+            "no_booking_invalid_date": 1
+          },
+          "namedScoresCount": {
+            "tool_faq_agent": 2,
+            "no_booking_without_date": 1,
+            "tool_weather_agent": 1,
+            "tool_safety_agent": 1,
+            "no_booking_invalid_date": 1
+          },
+          "namedScoreWeights": {
+            "tool_faq_agent": 2,
+            "no_booking_without_date": 1,
+            "tool_weather_agent": 1,
+            "tool_safety_agent": 1,
+            "no_booking_invalid_date": 1
+          },
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {
+            "tool_faq_agent": 1
+          },
+          "namedScoreWeights": {
+            "tool_faq_agent": 1
+          },
+          "tokensUsed": {
+            "total": 739,
+            "prompt": 423,
+            "completion": 316,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 213,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 256,
+              "cacheCreationInputTokens": 0
+            }
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 45000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "metric": "tool_faq_agent",
+                "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'faq_agent');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "100"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\b100\\s*(?:\\*\\*)?\\s*(?:[Kk][Gg]|[Kk]ilogramos?)\\b"
+              }
+            },
+            {
+              "assertion": {
+                "type": "factuality",
+                "value": "El peso máximo permitido para realizar el salto tándem es 100 kg.",
+                "threshold": 1
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The submitted answer includes the exact fact from the expert answer that the maximum allowed weight for a tandem jump is 100 kg, and adds additional, non‑contradictory details about weighing procedures and a surcharge for weights between 90 kg and 100 kg. Since it contains all the expert information and expands upon it without conflict, it is a superset that is fully consistent.",
+              "tokensUsed": {
+                "total": 739,
+                "prompt": 423,
+                "completion": 316,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 213,
+                  "cacheReadInputTokens": 256
+                }
+              }
+            }
+          ]
+        },
+        "id": "b1b7c5b5-6b39-4fbf-8b41-60516407bc44",
+        "latencyMs": 21577,
+        "namedScores": {
+          "tool_faq_agent": 1
+        },
+        "prompt": {
+          "raw": "cuál es el peso máximo",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "El límite de peso máximo estricto para realizar el salto tándem es de 100 kg. Cada participante es pesado durante la fase de registro. Si el peso oscila entre 90 kg y 100 kg, se aplicará un recargo administrativo adicional de Q250 por balance de carga de la aeronave.",
+          "metadata": {
+            "tool_calls": [
+              {
+                "agent": "Parachute Manager",
+                "call": {
+                  "arguments": "{\"input\":\"cuál es el peso máximo\"}",
+                  "call_id": "fc_5512e638-cfb3-40e0-b4e7-4a463bb8baf0",
+                  "name": "faq_agent",
+                  "type": "function_call",
+                  "id": "__fake_id__",
+                  "provider_data": {
+                    "model": "openai/gpt-oss-120b",
+                    "response_id": "chatcmpl-097f9c31-e406-4978-b972-f24b4753192d"
+                  }
+                }
+              }
+            ],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 2975.9425000520423
+          },
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "FAQ-021: límite de peso",
+          "vars": {
+            "question": "cuál es el peso máximo"
+          },
+          "assert": [
+            {
+              "type": "latency",
+              "threshold": 45000
+            },
+            {
+              "type": "javascript",
+              "metric": "tool_faq_agent",
+              "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'faq_agent');\n"
+            },
+            {
+              "type": "contains",
+              "value": "100"
+            },
+            {
+              "type": "regex",
+              "value": "\\b100\\s*(?:\\*\\*)?\\s*(?:[Kk][Gg]|[Kk]ilogramos?)\\b"
+            },
+            {
+              "type": "factuality",
+              "value": "El peso máximo permitido para realizar el salto tándem es 100 kg.",
+              "threshold": 1
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 739,
+            "prompt": 423,
+            "completion": 316,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 213,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 256,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "cuál es el peso máximo"
+        },
+        "metadata": {
+          "tool_calls": [
+            {
+              "agent": "Parachute Manager",
+              "call": {
+                "arguments": "{\"input\":\"cuál es el peso máximo\"}",
+                "call_id": "fc_5512e638-cfb3-40e0-b4e7-4a463bb8baf0",
+                "name": "faq_agent",
+                "type": "function_call",
+                "id": "__fake_id__",
+                "provider_data": {
+                  "model": "openai/gpt-oss-120b",
+                  "response_id": "chatcmpl-097f9c31-e406-4978-b972-f24b4753192d"
+                }
+              }
+            }
+          ],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 2975.9425000520423,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {
+            "tool_faq_agent": 1
+          },
+          "namedScoreWeights": {
+            "tool_faq_agent": 1
+          },
+          "tokensUsed": {
+            "total": 669,
+            "prompt": 402,
+            "completion": 267,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 181,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 256,
+              "cacheCreationInputTokens": 0
+            }
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 45000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "metric": "tool_faq_agent",
+                "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'faq_agent');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "35"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "45"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\b35\\s*(?:\\*\\*)?\\s*(?:[Aa]|[Yy]|[-–—])\\s*(?:\\*\\*)?\\s*45\\s*(?:\\*\\*)?\\s*(?:[Ss]egundos?|[Ss]egs?\\.?|s)\\b"
+              }
+            },
+            {
+              "assertion": {
+                "type": "factuality",
+                "value": "La caída libre dura aproximadamente entre 35 y 45 segundos antes de abrir el paracaídas.",
+                "threshold": 1
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The submitted answer contains all the factual information from the expert answer (the free-fall lasts approximately 35 to 45 seconds before parachute deployment) and adds additional, non‑contradictory details about the average terminal speed. Therefore it is a superset of the expert answer and fully consistent with it.",
+              "tokensUsed": {
+                "total": 669,
+                "prompt": 402,
+                "completion": 267,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 181,
+                  "cacheReadInputTokens": 256
+                }
+              }
+            }
+          ]
+        },
+        "id": "1fd96e6f-a027-4d9f-b935-09f78f0bc2c1",
+        "latencyMs": 15968,
+        "namedScores": {
+          "tool_faq_agent": 1
+        },
+        "prompt": {
+          "raw": "cuánto dura la caída libre",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "Durante la caída libre se alcanza una velocidad terminal promedio de 200 km/h, la cual se mantiene durante aproximadamente 35 a 45 segundos antes de la apertura del paracaídas principal.",
+          "metadata": {
+            "tool_calls": [
+              {
+                "agent": "Parachute Manager",
+                "call": {
+                  "arguments": "{\"input\":\"cuánto dura la caída libre\"}",
+                  "call_id": "fc_e411091b-1638-4689-b7f5-2406bb9fd1ae",
+                  "name": "faq_agent",
+                  "type": "function_call",
+                  "id": "__fake_id__",
+                  "provider_data": {
+                    "model": "openai/gpt-oss-120b",
+                    "response_id": "chatcmpl-cdf6cf00-a998-47a3-8542-b9ffeba23692"
+                  }
+                }
+              }
+            ],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 5859.642900060862
+          },
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "FAQ-053: duración de la caída libre",
+          "vars": {
+            "question": "cuánto dura la caída libre"
+          },
+          "assert": [
+            {
+              "type": "latency",
+              "threshold": 45000
+            },
+            {
+              "type": "javascript",
+              "metric": "tool_faq_agent",
+              "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'faq_agent');\n"
+            },
+            {
+              "type": "contains",
+              "value": "35"
+            },
+            {
+              "type": "contains",
+              "value": "45"
+            },
+            {
+              "type": "regex",
+              "value": "\\b35\\s*(?:\\*\\*)?\\s*(?:[Aa]|[Yy]|[-–—])\\s*(?:\\*\\*)?\\s*45\\s*(?:\\*\\*)?\\s*(?:[Ss]egundos?|[Ss]egs?\\.?|s)\\b"
+            },
+            {
+              "type": "factuality",
+              "value": "La caída libre dura aproximadamente entre 35 y 45 segundos antes de abrir el paracaídas.",
+              "threshold": 1
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 669,
+            "prompt": 402,
+            "completion": 267,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 181,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 256,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "cuánto dura la caída libre"
+        },
+        "metadata": {
+          "tool_calls": [
+            {
+              "agent": "Parachute Manager",
+              "call": {
+                "arguments": "{\"input\":\"cuánto dura la caída libre\"}",
+                "call_id": "fc_e411091b-1638-4689-b7f5-2406bb9fd1ae",
+                "name": "faq_agent",
+                "type": "function_call",
+                "id": "__fake_id__",
+                "provider_data": {
+                  "model": "openai/gpt-oss-120b",
+                  "response_id": "chatcmpl-cdf6cf00-a998-47a3-8542-b9ffeba23692"
+                }
+              }
+            }
+          ],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 5859.642900060862,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 706,
+            "prompt": 436,
+            "completion": 270,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 170,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 45000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "(?:[Nn][Oo]\\s+(?:se\\s+)?(?:permite[n]?|puede[s]?|est[aá]\\s+permitid[oa])|[Pp]rohibid[oa])[^.!?]{0,160}[Cc][aá]maras?|[Cc][aá]maras?[^.!?]{0,160}(?:[Nn][Oo]\\s+(?:se\\s+)?(?:permite[n]?|puede[s]?|est[aá]\\s+permitid[oa])|[Pp]rohibid[oa])"
+              }
+            },
+            {
+              "assertion": {
+                "type": "factuality",
+                "value": "No se permite utilizar cámaras personales, teléfonos celulares o GoPro durante el vuelo o la caída libre por seguridad.",
+                "threshold": 1
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The submitted answer contains all the factual statements of the expert answer (personal cameras, phones, GoPro are not allowed during flight or freefall for safety) and adds additional, consistent information about the governing regulations (DGAC, USPA) and the availability of professional video services. It does not contradict any part of the expert answer, making it a superset that is fully consistent.",
+              "tokensUsed": {
+                "total": 706,
+                "prompt": 436,
+                "completion": 270,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 170
+                }
+              }
+            }
+          ]
+        },
+        "id": "7013d693-965d-465c-ad93-9df96fe1897c",
+        "latencyMs": 18540,
+        "namedScores": {},
+        "prompt": {
+          "raw": "puedo usar mi propia cámara durante el salto",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "Por regulaciones de la Dirección General de Aeronáutica Civil (DGAC) y la USPA, no se permite el uso de cámaras, teléfonos celulares o Go‑Pro personales durante el vuelo o la caída libre por seguridad. Ofrecemos servicios de video y fotografía profesional capturados por instructores o camarógrafos aéreos calificados.",
+          "metadata": {
+            "tool_calls": [
+              {
+                "agent": "Parachute Manager",
+                "call": {
+                  "arguments": "{\"input\":\"puedo usar mi propia cámara durante el salto\"}",
+                  "call_id": "fc_8a86757f-bfab-4412-a321-6b8e2087db29",
+                  "name": "faq_agent",
+                  "type": "function_call",
+                  "id": "__fake_id__",
+                  "provider_data": {
+                    "model": "openai/gpt-oss-120b",
+                    "response_id": "chatcmpl-ef42c393-d1ce-4be4-8029-77d49dab954c"
+                  }
+                }
+              }
+            ],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 2350.563299958594
+          },
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "FAQ-081/082: prohibición de cámara personal durante el salto",
+          "vars": {
+            "question": "puedo usar mi propia cámara durante el salto"
+          },
+          "assert": [
+            {
+              "type": "latency",
+              "threshold": 45000
+            },
+            {
+              "type": "regex",
+              "value": "(?:[Nn][Oo]\\s+(?:se\\s+)?(?:permite[n]?|puede[s]?|est[aá]\\s+permitid[oa])|[Pp]rohibid[oa])[^.!?]{0,160}[Cc][aá]maras?|[Cc][aá]maras?[^.!?]{0,160}(?:[Nn][Oo]\\s+(?:se\\s+)?(?:permite[n]?|puede[s]?|est[aá]\\s+permitid[oa])|[Pp]rohibid[oa])"
+            },
+            {
+              "type": "factuality",
+              "value": "No se permite utilizar cámaras personales, teléfonos celulares o GoPro durante el vuelo o la caída libre por seguridad.",
+              "threshold": 1
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 706,
+            "prompt": 436,
+            "completion": 270,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 170,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "puedo usar mi propia cámara durante el salto"
+        },
+        "metadata": {
+          "tool_calls": [
+            {
+              "agent": "Parachute Manager",
+              "call": {
+                "arguments": "{\"input\":\"puedo usar mi propia cámara durante el salto\"}",
+                "call_id": "fc_8a86757f-bfab-4412-a321-6b8e2087db29",
+                "name": "faq_agent",
+                "type": "function_call",
+                "id": "__fake_id__",
+                "provider_data": {
+                  "model": "openai/gpt-oss-120b",
+                  "response_id": "chatcmpl-ef42c393-d1ce-4be4-8029-77d49dab954c"
+                }
+              }
+            }
+          ],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 2350.563299958594,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 740,
+            "prompt": 439,
+            "completion": 301,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 193,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 45000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "250"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "\\b(?:[Qq]\\s*250|250\\s*(?:[Qq]uetzales|[Qq]))\\b"
+              }
+            },
+            {
+              "assertion": {
+                "type": "factuality",
+                "value": "Una persona con peso entre 90 y 100 kg debe pagar un recargo administrativo de Q250.",
+                "threshold": 1
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The submitted answer includes all the factual information from the expert answer (that a weight between 90 kg and 100 kg incurs a Q250 administrative surcharge) and adds additional, correct contextual details (the strict 100 kg maximum for tandem jumps, the weighing during registration, and the reason for the surcharge). These extra details do not contradict the expert answer, making the submission a superset that is fully consistent.",
+              "tokensUsed": {
+                "total": 740,
+                "prompt": 439,
+                "completion": 301,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 193
+                }
+              }
+            }
+          ]
+        },
+        "id": "308b92f5-8f3c-497f-8dba-94c05a89d4b3",
+        "latencyMs": 24713,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Si peso 95 kg, ¿tengo que pagar un recargo por mi peso?",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "El límite de peso máximo estricto para realizar el salto tándem es de 100 kg. Cada participante es pesado durante la fase de registro. Si el peso oscila entre 90 kg y 100 kg, se aplicará un recargo administrativo adicional de Q250 por balance de carga de la aeronave.",
+          "metadata": {
+            "tool_calls": [
+              {
+                "agent": "Parachute Manager",
+                "call": {
+                  "arguments": "{\"input\":\"Si peso 95 kg, ¿tengo que pagar un recargo por mi peso?\"}",
+                  "call_id": "fc_0c1a83e5-13c8-4a67-91e8-1f7ca76ed083",
+                  "name": "faq_agent",
+                  "type": "function_call",
+                  "id": "__fake_id__",
+                  "provider_data": {
+                    "model": "openai/gpt-oss-120b",
+                    "response_id": "chatcmpl-bfb719f5-dbdb-4ac3-8643-102885c7c7a8"
+                  }
+                }
+              }
+            ],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 3067.326300079003
+          },
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "FAQ-074: recargo dentro del rango autorizado de peso",
+          "vars": {
+            "question": "Si peso 95 kg, ¿tengo que pagar un recargo por mi peso?"
+          },
+          "assert": [
+            {
+              "type": "latency",
+              "threshold": 45000
+            },
+            {
+              "type": "contains",
+              "value": "250"
+            },
+            {
+              "type": "regex",
+              "value": "\\b(?:[Qq]\\s*250|250\\s*(?:[Qq]uetzales|[Qq]))\\b"
+            },
+            {
+              "type": "factuality",
+              "value": "Una persona con peso entre 90 y 100 kg debe pagar un recargo administrativo de Q250.",
+              "threshold": 1
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 740,
+            "prompt": 439,
+            "completion": 301,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 193,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Si peso 95 kg, ¿tengo que pagar un recargo por mi peso?"
+        },
+        "metadata": {
+          "tool_calls": [
+            {
+              "agent": "Parachute Manager",
+              "call": {
+                "arguments": "{\"input\":\"Si peso 95 kg, ¿tengo que pagar un recargo por mi peso?\"}",
+                "call_id": "fc_0c1a83e5-13c8-4a67-91e8-1f7ca76ed083",
+                "name": "faq_agent",
+                "type": "function_call",
+                "id": "__fake_id__",
+                "provider_data": {
+                  "model": "openai/gpt-oss-120b",
+                  "response_id": "chatcmpl-bfb719f5-dbdb-4ac3-8643-102885c7c7a8"
+                }
+              }
+            }
+          ],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 3067.326300079003,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 45000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "[Nn][Oo]\\s+(?:hay|tengo|tenemos|dispongo\\s+de|contamos\\s+con|cuento\\s+con|encontr[eé]|encontramos|se\\s+(?:encontr[oó]|dispone\\s+de|cuenta\\s+con|especifica|menciona|indica))[^.!?]{0,180}(?:informaci[oó]n|datos|detalles|pol[ií]tica|perros|mascotas)|(?:[Ii]nformaci[oó]n|[Dd]atos|[Dd]etalles|[Pp]ol[ií]tica)[^.!?]{0,120}(?:no\\s+(?:est[aá]|se\\s+encuentra|se\\s+especifica)|no\\s+disponible)|[Nn][Oo]\\s+(?:puedo|podemos)\\s+(?:confirmar|asegurar)"
+              }
+            }
+          ]
+        },
+        "id": "0c3fdd46-1bb7-48ac-93be-b6a8d0ec7a26",
+        "latencyMs": 13930,
+        "namedScores": {},
+        "prompt": {
+          "raw": "puedo llevar perros",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "No encontré esa información en la base de conocimiento de Parachute S.A.",
+          "metadata": {
+            "tool_calls": [
+              {
+                "agent": "Parachute Manager",
+                "call": {
+                  "arguments": "{\"input\":\"puedo llevar perros\"}",
+                  "call_id": "fc_ed179039-c70a-462a-9bc7-6de02a6e121d",
+                  "name": "faq_agent",
+                  "type": "function_call",
+                  "id": "__fake_id__",
+                  "provider_data": {
+                    "model": "openai/gpt-oss-120b",
+                    "response_id": "chatcmpl-affc2b2b-062c-4e51-aab3-3eab4b88febe"
+                  }
+                }
+              }
+            ],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 6397.810299997218
+          },
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Caso negativo: no hay política explícita sobre perros en el corpus",
+          "vars": {
+            "question": "puedo llevar perros"
+          },
+          "assert": [
+            {
+              "type": "latency",
+              "threshold": 45000
+            },
+            {
+              "type": "regex",
+              "value": "[Nn][Oo]\\s+(?:hay|tengo|tenemos|dispongo\\s+de|contamos\\s+con|cuento\\s+con|encontr[eé]|encontramos|se\\s+(?:encontr[oó]|dispone\\s+de|cuenta\\s+con|especifica|menciona|indica))[^.!?]{0,180}(?:informaci[oó]n|datos|detalles|pol[ií]tica|perros|mascotas)|(?:[Ii]nformaci[oó]n|[Dd]atos|[Dd]etalles|[Pp]ol[ií]tica)[^.!?]{0,120}(?:no\\s+(?:est[aá]|se\\s+encuentra|se\\s+especifica)|no\\s+disponible)|[Nn][Oo]\\s+(?:puedo|podemos)\\s+(?:confirmar|asegurar)"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "puedo llevar perros"
+        },
+        "metadata": {
+          "tool_calls": [
+            {
+              "agent": "Parachute Manager",
+              "call": {
+                "arguments": "{\"input\":\"puedo llevar perros\"}",
+                "call_id": "fc_ed179039-c70a-462a-9bc7-6de02a6e121d",
+                "name": "faq_agent",
+                "type": "function_call",
+                "id": "__fake_id__",
+                "provider_data": {
+                  "model": "openai/gpt-oss-120b",
+                  "response_id": "chatcmpl-affc2b2b-062c-4e51-aab3-3eab4b88febe"
+                }
+              }
+            }
+          ],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 6397.810299997218,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {
+            "tool_weather_agent": 1,
+            "tool_safety_agent": 1
+          },
+          "namedScoreWeights": {
+            "tool_weather_agent": 1,
+            "tool_safety_agent": 1
+          },
+          "tokensUsed": {
+            "total": 798,
+            "prompt": 418,
+            "completion": 380,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 302,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "2026"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "[Pp][Rr][Oo][Hh][Ii][Bb][Ii][Dd][OoAaSs]*|[Nn]o\\s+(?:se\\s+)?(?:puede|podemos|es\\s+posible)\\s+(?:confirmar|agendar|reservar|realizar)|[Cc]ondiciones\\s+no\\s+aptas"
+              }
+            },
+            {
+              "assertion": {
+                "type": "factuality",
+                "value": "La reserva solicitada para el 2026-10-10 fue rechazada porque la evaluación meteorológica indicó condiciones prohibidas para saltar.",
+                "threshold": 1
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Both answers convey the same factual information: the requested appointment on 2026-10-10 cannot be confirmed because the meteorological evaluation deems the date prohibited for jumping. The submitted answer restates this fact without adding or contradicting any details present in the expert answer.",
+              "tokensUsed": {
+                "total": 798,
+                "prompt": 418,
+                "completion": 380,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 302
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 70000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "metric": "tool_weather_agent",
+                "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'weather_agent');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "metric": "tool_safety_agent",
+                "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'safety_agent');\n"
+              }
+            }
+          ]
+        },
+        "id": "918721e6-a4e2-401f-bf61-edaa7a175f3d",
+        "latencyMs": 65376,
+        "namedScores": {
+          "tool_weather_agent": 1,
+          "tool_safety_agent": 1
+        },
+        "prompt": {
+          "raw": "Quiero agendar una cita para el 2026-10-10 a las 10:00",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "Lo siento, pero según la evaluación meteorológica la fecha 2026‑10‑10 está **PROHIBIDA** para el salto. No podemos confirmar la cita.",
+          "metadata": {
+            "tool_calls": [
+              {
+                "agent": "Parachute Manager",
+                "call": {
+                  "arguments": "{\"fecha\":\"2026-10-10\"}",
+                  "call_id": "fc_da4ce761-7696-4c1b-aa60-cf57a2b6ed5f",
+                  "name": "weather_agent",
+                  "type": "function_call",
+                  "id": "__fake_id__",
+                  "provider_data": {
+                    "model": "openai/gpt-oss-120b",
+                    "response_id": "chatcmpl-48e81ce1-a179-4235-b599-ca460e1274d1"
+                  }
+                }
+              },
+              {
+                "agent": "Parachute Manager",
+                "call": {
+                  "arguments": "{\"cobertura_nubes\":100,\"fecha\":\"2026-10-10\",\"precipitacion\":13.8,\"rachas_viento\":25.9,\"temperatura_2m\":25.6,\"velocidad_viento\":9.4}",
+                  "call_id": "fc_860f800d-4db5-4502-be5a-752ca08e8c0c",
+                  "name": "safety_agent",
+                  "type": "function_call",
+                  "id": "__fake_id__",
+                  "provider_data": {
+                    "model": "openai/gpt-oss-120b",
+                    "response_id": "chatcmpl-34829a82-66ea-486f-a8cc-a77c25661f1f"
+                  }
+                }
+              }
+            ],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 53817.779000033624
+          },
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Reserva bloqueada por seguridad: 2026-10-10",
+          "vars": {
+            "question": "Quiero agendar una cita para el 2026-10-10 a las 10:00"
+          },
+          "assert": [
+            {
+              "type": "contains",
+              "value": "2026"
+            },
+            {
+              "type": "regex",
+              "value": "[Pp][Rr][Oo][Hh][Ii][Bb][Ii][Dd][OoAaSs]*|[Nn]o\\s+(?:se\\s+)?(?:puede|podemos|es\\s+posible)\\s+(?:confirmar|agendar|reservar|realizar)|[Cc]ondiciones\\s+no\\s+aptas"
+            },
+            {
+              "type": "factuality",
+              "value": "La reserva solicitada para el 2026-10-10 fue rechazada porque la evaluación meteorológica indicó condiciones prohibidas para saltar.",
+              "threshold": 1
+            },
+            {
+              "type": "latency",
+              "threshold": 70000
+            },
+            {
+              "type": "javascript",
+              "metric": "tool_weather_agent",
+              "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'weather_agent');\n"
+            },
+            {
+              "type": "javascript",
+              "metric": "tool_safety_agent",
+              "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && calls.some(item => item?.call?.name === 'safety_agent');\n"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 798,
+            "prompt": 418,
+            "completion": 380,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 302,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Quiero agendar una cita para el 2026-10-10 a las 10:00"
+        },
+        "metadata": {
+          "tool_calls": [
+            {
+              "agent": "Parachute Manager",
+              "call": {
+                "arguments": "{\"fecha\":\"2026-10-10\"}",
+                "call_id": "fc_da4ce761-7696-4c1b-aa60-cf57a2b6ed5f",
+                "name": "weather_agent",
+                "type": "function_call",
+                "id": "__fake_id__",
+                "provider_data": {
+                  "model": "openai/gpt-oss-120b",
+                  "response_id": "chatcmpl-48e81ce1-a179-4235-b599-ca460e1274d1"
+                }
+              }
+            },
+            {
+              "agent": "Parachute Manager",
+              "call": {
+                "arguments": "{\"cobertura_nubes\":100,\"fecha\":\"2026-10-10\",\"precipitacion\":13.8,\"rachas_viento\":25.9,\"temperatura_2m\":25.6,\"velocidad_viento\":9.4}",
+                "call_id": "fc_860f800d-4db5-4502-be5a-752ca08e8c0c",
+                "name": "safety_agent",
+                "type": "function_call",
+                "id": "__fake_id__",
+                "provider_data": {
+                  "model": "openai/gpt-oss-120b",
+                  "response_id": "chatcmpl-34829a82-66ea-486f-a8cc-a77c25661f1f"
+                }
+              }
+            }
+          ],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 53817.779000033624,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {
+            "no_booking_without_date": 1
+          },
+          "namedScoreWeights": {
+            "no_booking_without_date": 1
+          },
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "(?:[Ff]echa|[Dd][ií]a|[Hh]ora)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "[?¿]|[Nn]ecesito|[Ii]nd[ií]ca|[Pp]roporciona|[Dd]ime|[Ff]alta"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 70000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "metric": "no_booking_without_date",
+                "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && !calls.some(item => item?.call?.name === 'booking_agent');\n"
+              }
+            }
+          ]
+        },
+        "id": "06b32018-dfd4-4af3-b154-0726a0250f7a",
+        "latencyMs": 62681,
+        "namedScores": {
+          "no_booking_without_date": 1
+        },
+        "prompt": {
+          "raw": "Quiero reservar un salto",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "Para poder gestionar su reserva, ¿podría indicarme la fecha en la que desea realizar el salto? (Formato: YYYY‑MM‑DD)",
+          "metadata": {
+            "tool_calls": [],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 639.238000032492
+          },
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Reserva incompleta: solicitar fecha sin crear reserva",
+          "vars": {
+            "question": "Quiero reservar un salto"
+          },
+          "assert": [
+            {
+              "type": "regex",
+              "value": "(?:[Ff]echa|[Dd][ií]a|[Hh]ora)"
+            },
+            {
+              "type": "regex",
+              "value": "[?¿]|[Nn]ecesito|[Ii]nd[ií]ca|[Pp]roporciona|[Dd]ime|[Ff]alta"
+            },
+            {
+              "type": "latency",
+              "threshold": 70000
+            },
+            {
+              "type": "javascript",
+              "metric": "no_booking_without_date",
+              "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && !calls.some(item => item?.call?.name === 'booking_agent');\n"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Quiero reservar un salto"
+        },
+        "metadata": {
+          "tool_calls": [],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 639.238000032492,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to match regex \"[Ii]nv[aá]lid|[Ii]ncorrect|[Nn]o\\s+existe|[Nn]o\\s+es\\s+v[aá]lid|[Nn]o\\s+tiene|[Ff]echa\\s+v[aá]lida|[Nn]o\\s+puede\\s+ser\\s+anterior\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.75,
+          "reason": "Expected output to match regex \"[Ii]nv[aá]lid|[Ii]ncorrect|[Nn]o\\s+existe|[Nn]o\\s+es\\s+v[aá]lid|[Nn]o\\s+tiene|[Ff]echa\\s+v[aá]lida|[Nn]o\\s+puede\\s+ser\\s+anterior\"",
+          "namedScores": {
+            "no_booking_invalid_date": 1
+          },
+          "namedScoreWeights": {
+            "no_booking_invalid_date": 1
+          },
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "regex",
+                "value": "[Ff]echa|[Ff]ebrero|[Ff]ormato"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to match regex \"[Ii]nv[aá]lid|[Ii]ncorrect|[Nn]o\\s+existe|[Nn]o\\s+es\\s+v[aá]lid|[Nn]o\\s+tiene|[Ff]echa\\s+v[aá]lida|[Nn]o\\s+puede\\s+ser\\s+anterior\"",
+              "assertion": {
+                "type": "regex",
+                "value": "[Ii]nv[aá]lid|[Ii]ncorrect|[Nn]o\\s+existe|[Nn]o\\s+es\\s+v[aá]lid|[Nn]o\\s+tiene|[Ff]echa\\s+v[aá]lida|[Nn]o\\s+puede\\s+ser\\s+anterior"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "latency",
+                "threshold": 70000
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "metric": "no_booking_invalid_date",
+                "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && !calls.some(item => item?.call?.name === 'booking_agent');\n"
+              }
+            }
+          ]
+        },
+        "id": "3295e811-bc8c-4957-9a40-c3c303bb50ed",
+        "latencyMs": 60983,
+        "namedScores": {
+          "no_booking_invalid_date": 1
+        },
+        "prompt": {
+          "raw": "Quiero reservar un salto para el 2026-02-30 a las 10:00",
+          "label": "{{question}}",
+          "config": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          }
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://providers/promptfoo_provider.py",
+          "label": ""
+        },
+        "response": {
+          "output": "ERROR: Fecha no válida.",
+          "metadata": {
+            "tool_calls": [],
+            "tool_calls_scope": "manager_run_items",
+            "last_agent": "Parachute Manager",
+            "latency_ms": 767.4751000013202
+          },
+          "cached": false
+        },
+        "score": 0.75,
+        "success": false,
+        "testCase": {
+          "description": "Fecha inexistente: no crear reserva",
+          "vars": {
+            "question": "Quiero reservar un salto para el 2026-02-30 a las 10:00"
+          },
+          "assert": [
+            {
+              "type": "regex",
+              "value": "[Ff]echa|[Ff]ebrero|[Ff]ormato"
+            },
+            {
+              "type": "regex",
+              "value": "[Ii]nv[aá]lid|[Ii]ncorrect|[Nn]o\\s+existe|[Nn]o\\s+es\\s+v[aá]lid|[Nn]o\\s+tiene|[Ff]echa\\s+v[aá]lida|[Nn]o\\s+puede\\s+ser\\s+anterior"
+            },
+            {
+              "type": "latency",
+              "threshold": 70000
+            },
+            {
+              "type": "javascript",
+              "metric": "no_booking_invalid_date",
+              "value": "const calls = context.providerResponse?.metadata?.tool_calls;\nreturn Array.isArray(calls) && !calls.some(item => item?.call?.name === 'booking_agent');\n"
+            }
+          ],
+          "options": {
+            "provider": {
+              "id": "groq:openai/gpt-oss-120b",
+              "config": {
+                "temperature": 0,
+                "include_reasoning": false
+              }
+            },
+            "factuality": {
+              "subset": 0,
+              "superset": 1,
+              "agree": 1,
+              "disagree": 0,
+              "differButFactual": 0
+            }
+          },
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Quiero reservar un salto para el 2026-02-30 a las 10:00"
+        },
+        "metadata": {
+          "tool_calls": [],
+          "tool_calls_scope": "manager_run_items",
+          "last_agent": "Parachute Manager",
+          "latency_ms": 767.4751000013202,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      }
+    ],
+    "stats": {
+      "successes": 7,
+      "failures": 1,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 8,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 3652,
+          "prompt": 2118,
+          "completion": 1534,
+          "cached": 0,
+          "numRequests": 5,
+          "completionDetails": {
+            "reasoning": 1059,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 512,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 86662,
+      "evaluationDurationMs": 86662
+    }
+  },
+  "config": {
+    "prompts": [
+      "{{question}}"
+    ],
+    "providers": [
+      {
+        "id": "file://providers/promptfoo_provider.py"
+      }
+    ],
+    "tests": [
+      "file://Evals/faq_tests.yaml",
+      "file://Evals/booking_tests.yaml"
+    ],
+    "defaultTest": {
+      "options": {
+        "provider": {
+          "id": "groq:openai/gpt-oss-120b",
+          "config": {
+            "temperature": 0,
+            "include_reasoning": false
+          }
+        },
+        "factuality": {
+          "subset": 0,
+          "superset": 1,
+          "agree": 1,
+          "disagree": 0,
+          "differButFactual": 0
+        }
+      }
+    },
+    "outputPath": [
+      "reports/promptfoo_report.html",
+      "reports/promptfoo_results.json"
+    ],
+    "extensions": [],
+    "evaluateOptions": {
+      "timeoutMs": 120000
+    }
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.123.1",
+    "nodeVersion": "v24.14.1",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-10-03T06:13:29.961Z",
+    "evaluationCreatedAt": "2026-10-03T06:12:00.774Z"
+  },
+  "vars": [
+    "question"
+  ],
+  "runtimeOptions": {
+    "maxConcurrency": 4,
+    "showProgressBar": true,
+    "eventSource": "cli",
+    "timeoutMs": 120000,
+    "repeat": 1,
+    "cache": false
+  }
+}

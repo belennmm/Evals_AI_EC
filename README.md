@@ -8,27 +8,19 @@ El proyecto utiliza Groq mediante una API compatible con OpenAI y el modelo `ope
 
 Video demostrativo: [https://youtu.be/WpdA-NCLGgw](https://youtu.be/WpdA-NCLGgw)
 
-## PREGUNTAS
-1. ¿Qué arquitectura/arquitecturas resuelven mejor este problema? ¿Por qué?
 
-Considero que la arquitectura centralizada es la que mejor resuelve este problema para este punto. El problema y su solución tienen tareas bien definidas, como responder preguntas frecuentes, consultar el clima, evaluar la seguridad y realizar una reserva. En la arquitectura centralizada, un solo manager mantiene el control y decide qué agente debe utilizar, lo que hace que el flujo sea más sencillo de mantener. 
+### Archivos de reporte
 
-En cambio, si el sistema creciera y se agregaran más funciones, yo optaría por la arquitectura jerárquica. Su separación entre un supervisor de información y otro de reservas permite organizar mejor las responsabilidades. La arquitectura descentralizada funciona bien con handoffs, pero su flujo sí es más complejo de controlar porque el control de la conversación va pasando entre agentes.
+Archivos generados por Promptfoo son [reporte HTML](reports/promptfoo_report.html) y [resultados JSON](reports/promptfoo_results.json). 
 
-Por ende, yo elegiría la arquitectura centralizada, mientras que la jerárquica sería una buena alternativa si el sistema aumentara.
-
-2. ¿Considera que es necesario utilizar un sistema multiagente en este caso? ¿Por qué?
-
-No creo que un sistema multiagente sea necesario para resolver este problema en su escala actual. Las funciones del sistema podrían implementarse con un solo agente que utilice herramientas para consultar las FAQs, obtener el clima, evaluar las condiciones y registrar una reserva; esto sin complicar el mantenimiento. 
-
-Tener un multiagente sí es ventajoso porque cada agente puede encargarse de una responsabilidad específica; pero esto lo implementaría en un futuro si hay más tareas o si se tiene un volumen más grance. Para esta etapa se pudieron reutilizar las mismas herramientas de clima y seguridad en las tres arquitecturas, en lugar de volver a implementar esas reglas.
-
-Para esta versión se puede usar un agente sin problema. Si Parachute S.A. continúa agregando servicios y reglas, sí sería bueno cambiarlo a multiagente ya que permitiría mantener el sistema mejor organizado y distribuir las responsabilidades entre agentes.
+```powershell
+npx --yes promptfoo@latest eval --no-cache --output reports/promptfoo_report.html reports/promptfoo_results.json
+```
 
 
 ## Tecnologías
 
-- Python 3.11
+- Python 3.12
 - Docker / Docker Compose
 - PostgreSQL
 - pgvector
@@ -41,6 +33,7 @@ Para esta versión se puede usar un agente sin problema. Si Parachute S.A. conti
 - python-dotenv
 - requests
 - pytest
+- Promptfoo
 
 Modelo de lenguaje utilizado: `openai/gpt-oss-120b`
 
@@ -55,6 +48,16 @@ Dimensión de los embeddings: `384`
 ├── centralized/                 # Arquitectura con Manager central
 ├── decentralized/               # Arquitectura basada en handoffs
 ├── hierarchical/                # Arquitectura con supervisores
+├── Evals/
+│   ├── faq_tests.yaml            # Evals FAQ
+│   └── booking_tests.yaml        # Evals Booking
+├── providers/
+│   ├── __init__.py
+│   └── promptfoo_provider.py     # Adaptador Python para Promptfoo
+├── reports/
+│   ├── promptfoo_report.html     # Reporte oficial HTML
+│   └── promptfoo_results.json    # Resultados oficiales JSON
+├── promptfooconfig.yaml
 ├── shared/
 │   ├── model_config.py          # Configuración reutilizable de Groq + Agents SDK
 │   ├── safety_tool.py           # Reglas de seguridad del salto
@@ -219,6 +222,8 @@ Las tres resuelven el mismo caso, pero distribuyen la coordinación de forma dis
 
 La finalidad de mantener las tres es comparar sus diferencias técnicas; este README no establece una como la mejor.
 
+Para esta hoja de trabajo de evaluación se seleccionó la arquitectura **CENTRALIZADA** como sistema bajo evaluación. Las otras arquitecturas se conservan para comparación.
+
 ## Calendarización local
 
 El Booking Agent implementa una calendarización sencilla en memoria. No modifica PostgreSQL.
@@ -258,11 +263,13 @@ Configura al menos:
 ```text
 GROQ_API_KEY=tu_api_key_de_groq
 DB_HOST=localhost
-DB_PORT=5432
+DB_PORT=5433
 DB_NAME=parachute_rag
 DB_USER=parachute_user
 DB_PASSWORD=parachute_secure_password
 ```
+
+Estos valores corresponden a la ejecución local desde Windows. Dentro de Docker, el servicio de aplicación utiliza `DB_HOST=postgres` y el puerto interno `5432`.
 
 
 ### Construcción y base de datos
@@ -345,8 +352,45 @@ Quiero agendar un salto para 2026-09-23
 
 La fecha solicitada debe estar dentro de los próximos 16 días para que Open-Meteo pueda proporcionar el pronóstico.
 
-## Consideraciones
+## Evaluación con Promptfoo
 
-El corpus original de Parachute S.A. contiene respuestas completas y otras más genéricas. El agente RAG no completa información faltante utilizando conocimiento externo.
+La hoja de evaluación utiliza el flujo real `Promptfoo → providers/promptfoo_provider.py → centralized/manager_agent.py → agentes especializados`. El adaptador devuelve la respuesta final y metadata estructurada; no sustituye el sistema con respuestas simuladas.
 
-Cuando una FAQ relevante no contiene el dato solicitado, el agente indica que la información específica no está disponible en la base de conocimiento. Esto permite mantener respuestas respaldadas por el corpus proporcionado.
+La suite contiene cinco casos FAQ y tres Booking. Combina `contains`, `regex`, `factuality`, latencia y tool execution. Factuality se aplica a cuatro FAQ y al rechazo de reserva por seguridad, mediante el grader `groq:openai/gpt-oss-120b`, con la misma variable `GROQ_API_KEY`. Los límites de latencia son 45 000 ms para FAQ y 70 000 ms para Booking.
+
+Promptfoo tiene además un timeout de ejecución de 120 000 ms por caso para registrar como error una llamada externa que no termine. Este timeout no sustituye ni eleva las assertions de latencia. Durante el cierre se interrumpieron dos intentos con siete resultados guardados y el caso meteorológico pendiente; los reportes corresponden únicamente a la última ejecución completa.
+
+### Casos evaluados
+
+FAQ cubre peso máximo de 100 kg, caída libre de 35 a 45 segundos, prohibición de cámara personal, recargo de Q250 entre 90 y 100 kg, y una consulta sobre perros sin información suficiente.
+
+Booking cubre la reserva del `2026-10-10` a las `10:00` bloqueada por seguridad, una solicitud sin fecha y la fecha inexistente `2026-02-30`. Las fechas explícitas evitan ambigüedades como “mañana”, pero no congelan el pronóstico.
+
+Tool execution usa assertions JavaScript de Promptfoo sobre `context.providerResponse.metadata.tool_calls`. Se exige `faq_agent` en peso y caída libre, y `weather_agent` y `safety_agent` en la reserva bloqueada. No se exige `booking_agent` cuando seguridad bloquea el flujo; tampoco debe invocarse al faltar una fecha o ser inválida. No se comparan IDs dinámicos.
+
+### Ejecución local en Windows
+
+Se requiere Node.js/npm, el entorno Python 3.12 con `requirements.txt`, PostgreSQL disponible en `localhost:5433`, el corpus cargado y `.env` configurado. `npx` descarga Promptfoo en su caché si es necesario; no requiere instalación global.
+
+```powershell
+$env:PROMPTFOO_PYTHON = (Join-Path (Get-Location) 'venv\Scripts\python.exe')
+$env:PYTHONIOENCODING = 'utf-8'
+
+npx --yes promptfoo@latest eval --no-cache
+```
+
+### Resultado final registrado
+
+Última ejecución completa: `eval-v6Z-2026-10-03T06:12:00`, con **7 passed, 1 failed y 0 errors**, duración de **1 min 29 s** y **3 652 tokens de grading** (2 118 de entrada y 1 534 de salida). Los cinco FAQ, la reserva bloqueada y la solicitud sin fecha pasaron.
+
+La fecha inválida respondió `ERROR: Fecha no válida.`. Falló la regex del test porque no contempla exactamente la variante `no válida`; el sistema sí rechazó la fecha. Se conserva la assertion y se documenta este pendiente de revisión, sin cambiar agentes ni tests para ocultar el fallo. El comando terminó con código 1 por ese test fallido.
+
+### Limitaciones de la evaluación
+
+- El clima puede cambiar: una fecha fija puede producir otro pronóstico y, con el tiempo, quedar en el pasado o fuera de los 16 días permitidos.
+- No se obtuvo una reserva exitosa durante los evals realizados; las fechas futuras probadas fueron bloqueadas por seguridad.
+- No se evaluaron duplicados de forma confiable: las reservas viven en memoria y Promptfoo puede utilizar distintos procesos.
+- Booking conserva fechas durante el proceso, no horarios ni reservas persistentes entre ejecuciones.
+- `tool_calls` refleja principalmente llamadas del manager a agentes; no expone todas las herramientas internas ni garantiza por sí solo que cada llamada haya terminado correctamente.
+- Factuality utiliza un LLM grader y puede variar o emitir juicios discutibles; las assertions determinísticas complementan esa revisión.
+- Una ejecución exitosa representa los casos observados y no garantiza todos los flujos posibles.

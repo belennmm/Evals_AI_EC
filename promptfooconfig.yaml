@@ -1,6 +1,10 @@
 providers:
   - id: file://providers/promptfoo_provider.py
 
+# Evitar que una llamada externa pendiente impida exportar los resultados.
+evaluateOptions:
+  timeoutMs: 120000
+
 prompts:
   - "{{question}}"
 

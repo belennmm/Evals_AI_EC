@@ -27,6 +27,7 @@ wheels/
 
 # env
 venv/
+venv_old/
 .venv/
 ENV/
 env/
